@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Gestione Bot CruLoryBot</title>
+<script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var template = $("tbody tr:eq(0)").clone();	// clono e rimuovo riga di template
+	$("tbody tr").remove();
+
+	$.getJSON("/list",function(users) {
+		for(var i = 0;i < users.length;i++) {
+			var u = users[i];
+			var chat = u.chat;
+			var row = template.clone();
+			$("#chatid",row).html(u.chatid);
+
+			$("#username",row).html(chat.username);
+			$("#first_name",row).html(chat.first_name);
+			$("#last_name",row).html(chat.last_name);
+
+			$("tbody").append(row);
+		}
+		$("td img").click(function() {
+			var row = $(this).parent().parent();
+			var index = $("tbody tr").index(row);
+			$.getJSON("/remove?chatid="+users[index].chatid,function(res) {
+				location.href = 'index.html';
+			});
+		});
+		$("body").show();
+	});
+});
+</script>
+</head>
+<body style="display:none" id="body">
+	<h1>Tabella degli utenti iscritti al bot</h1>
+	<table> 
+	    <thead>
+	      <tr>
+		<th>Chatid</th>
+		<th>Username</th>
+		<th>Nome</th>
+		<th>Cognome</th>
+		<th></th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr>
+		<td id="chatid">uno</td>
+		<td id="username">bravo</td>
+		<td id="first_name">due</td>
+		<td id="last_name"></td>
+		<td id="remove"><img src="trash.png" style="cursor:pointer"/></td>
+	      </tr>
+	      <tr>
+		<td id="chatid">uno</td>
+		<td id="username">bravo</td>
+		<td id="first_name">due</td>
+		<td id="last_name"></td>
+		<td id="remove"><img src="trash.png" style="cursor:pointer"/></td>
+	      </tr>
+	      <tr>
+		<td id="chatid">uno</td>
+		<td id="username">bravo</td>
+		<td id="first_name">due</td>
+		<td id="last_name"></td>
+		<td id="remove"><img src="trash.png" style="cursor:pointer"/></td>
+	      </tr>
+	      <tr>
+		<td id="chatid">uno</td>
+		<td id="username">bravo</td>
+		<td id="first_name">due</td>
+		<td id="last_name"></td>
+		<td id="remove"><img src="trash.png" style="cursor:pointer"/></td>
+	      </tr>
+	      <tr>
+		<td id="chatid">uno</td>
+		<td id="username">bravo</td>
+		<td id="first_name">due</td>
+		<td id="last_name"></td>
+		<td id="remove"><img src="trash.png" style="cursor:pointer"/></td>
+	      </tr>
+	      <tr>
+		<td id="chatid">uno</td>
+		<td id="username">bravo</td>
+		<td id="first_name">due</td>
+		<td id="last_name"></td>
+		<td id="remove"><img src="trash.png" style="cursor:pointer"/></td>
+	      </tr>
+	      <tr>
+		<td id="chatid">uno</td>
+		<td id="username">bravo</td>
+		<td id="first_name">due</td>
+		<td id="last_name"></td>
+		<td id="remove"><img src="trash.png" style="cursor:pointer"/></td>
+	      </tr>
+	      <tr>
+		<td id="chatid">uno</td>
+		<td id="username">bravo</td>
+		<td id="first_name">due</td>
+		<td id="last_name"></td>
+		<td id="remove"><img src="trash.png" style="cursor:pointer"/></td>
+	      </tr>
+	    </tbody>
+	</table>
+</body>
+</html>
